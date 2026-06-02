@@ -4,26 +4,35 @@ void main() {
   runApp(const Homepage());
 }
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  int count = 0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Color.from(alpha: 0.02, red: 250, green: 253, blue: 255),
+        colorSchemeSeed: Color.from(alpha: 0.02, red: 250, green: 253, blue: 255,
+        ),
         fontFamily: 'jost',
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('One Trick Pony',
-          style: TextStyle(
-            fontWeight: FontWeight.w800,
+          title: const Text(
+            'One Trick Pony',
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
             ),
           ),
           centerTitle: true,
-          backgroundColor: Color.fromARGB(2, 250, 253, 255)
+          backgroundColor: const Color.fromARGB(2, 250, 253, 255),
         ),
         body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -31,34 +40,44 @@ class Homepage extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
-                Text('Today Event(1日1回だけ押せる)',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
+                const Text(
+                  'Today Event',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
                   ),
                 ),
-                SizedBox(height: 70,),
-                ElevatedButton(onPressed: () {}, 
-                child: Text('Check',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 30,
-                  color: Colors.black,
+                const SizedBox(height: 70),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      count++;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(300, 300),
+                  ),
+                  child: const Text(
+                    'Check',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 30,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
-                ),
-                style: ElevatedButton.styleFrom(fixedSize: Size(300, 300)),
-                ),
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
-                Text('count +1day',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
+                Text(
+                  'day $count ',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                  ),
                 ),
               ],
             ),
