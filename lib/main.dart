@@ -12,7 +12,8 @@ class Homepage extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Color.from(alpha: 0.02, red: 250, green: 253, blue: 255)
+        colorSchemeSeed: Color.from(alpha: 0.02, red: 250, green: 253, blue: 255),
+        fontFamily: 'jost',
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -41,8 +42,14 @@ class Homepage extends StatelessWidget {
                 ),
                 SizedBox(height: 70,),
                 ElevatedButton(onPressed: () {}, 
-                child: Text('Check',),
-                style: ElevatedButton.styleFrom(fixedSize: Size(200, 200)),
+                child: Text('Check',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 30,
+                  color: Colors.black,
+                ),
+                ),
+                style: ElevatedButton.styleFrom(fixedSize: Size(300, 300)),
                 ),
                 SizedBox(
                   height: 100,
