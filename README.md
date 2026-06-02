@@ -1,12 +1,10 @@
-# one_trick_pony
+# One Trick Pony
 
-A new Flutter project.
+タスクがんばろうね。
 
-## Getting Started
+## 概要
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
+ただ毎日の連続記録を伸ばしていけ。それだけだ。
 
 - [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
 - [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
