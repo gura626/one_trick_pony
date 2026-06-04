@@ -27,7 +27,7 @@ class _HomepageState extends State<Homepage> {
         }
         setState(() {
           count ++;
-          lastCheckDate == now;
+          lastCheckDate = now;
         });
   }
 
