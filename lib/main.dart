@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 void main() {
   runApp(const Homepage());
 }
@@ -27,7 +26,7 @@ class _HomepageState extends State<Homepage> {
         }
         setState(() {
           count ++;
-          lastCheckDate = now;
+          lastCheckDate == now;
         });
   }
 
