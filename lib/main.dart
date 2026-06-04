@@ -14,6 +14,23 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   int count = 0;
 
+  DateTime? lastCheckDate;
+
+  void checkToday () {
+    DateTime now = DateTime.now();
+
+    if (lastCheckDate != null &&
+        lastCheckDate!.year == now.year &&
+        lastCheckDate!.month == now.month &&
+        lastCheckDate!.day == now.day) {
+          return;
+        }
+        setState(() {
+          count ++;
+          lastCheckDate == now;
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,6 +46,7 @@ class _HomepageState extends State<Homepage> {
             'One Trick Pony',
             style: TextStyle(
               fontWeight: FontWeight.w800,
+              fontSize: 27,
             ),
           ),
           centerTitle: true,
@@ -52,11 +70,7 @@ class _HomepageState extends State<Homepage> {
                 ),
                 const SizedBox(height: 70),
                 ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      count++;
-                    });
-                  },
+                  onPressed: checkToday,
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(300, 300),
                   ),
