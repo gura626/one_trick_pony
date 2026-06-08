@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 void main() {
   runApp(const Homepage());
 }
@@ -11,11 +13,21 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+
+  Future<void> saveCount() async {
+    
+  final prefs = await SharedPreferences.getInstance();
+
+  await prefs.setInt('count', count);
+  }
   int count = 0;
 
   DateTime? lastCheckDate;
 
-  void checkToday () {
+  bool checkedToday = false;
+
+  void checkToday() {
+
     DateTime now = DateTime.now();
 
     if (lastCheckDate != null &&
@@ -26,7 +38,7 @@ class _HomepageState extends State<Homepage> {
         }
         setState(() {
           count ++;
-          lastCheckDate == now;
+          lastCheckDate = now;
         });
   }
 
@@ -67,6 +79,7 @@ class _HomepageState extends State<Homepage> {
                     fontSize: 20,
                   ),
                 ),
+                const SizedBox(height: 20),
                 const SizedBox(height: 70),
                 ElevatedButton(
                   onPressed: checkToday,
