@@ -14,12 +14,40 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
 
-  Future<void> saveCount() async {
-    
+  @override
+  void initState() {
+    super.initState();
+    loadCount();
+  }
+
+Future<void> saveCount() async {
   final prefs = await SharedPreferences.getInstance();
 
   await prefs.setInt('count', count);
+
+  if (lastCheckDate != null) {
+    await prefs.setString(
+      'lastCheckDate',
+      lastCheckDate!.toIso8601String(),
+    );
   }
+}
+
+Future<void> loadCount() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  setState(() {
+    count = prefs.getInt('count') ?? 0;
+
+    String? savedDate =
+        prefs.getString('lastCheckDate');
+
+    if (savedDate != null) {
+      lastCheckDate = DateTime.parse(savedDate);
+    }
+  });
+}
+
   int count = 0;
 
   DateTime? lastCheckDate;
@@ -40,6 +68,8 @@ class _HomepageState extends State<Homepage> {
           count ++;
           lastCheckDate = now;
         });
+
+        saveCount();
   }
 
   @override
