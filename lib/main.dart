@@ -54,6 +54,15 @@ Future<void> loadCount() async {
 
   bool checkedToday = false;
 
+  bool isCheckedToday() {
+    DateTime now = DateTime.now();
+
+    return lastCheckDate != null &&
+        lastCheckDate!.year == now.year &&
+        lastCheckDate!.month == now.month &&
+        lastCheckDate!.day == now.day;
+  }
+
   void checkToday() {
 
     DateTime now = DateTime.now();
@@ -112,7 +121,9 @@ Future<void> loadCount() async {
                 const SizedBox(height: 20),
                 const SizedBox(height: 70),
                 ElevatedButton(
-                  onPressed: checkToday,
+                  onPressed: isCheckedToday()
+                    ? null
+                    : checkToday,
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(300, 300),
                   ),
