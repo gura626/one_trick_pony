@@ -52,8 +52,6 @@ Future<void> loadCount() async {
 
   DateTime? lastCheckDate;
 
-  bool checkedToday = false;
-
   bool isCheckedToday() {
     DateTime now = DateTime.now();
 
@@ -118,8 +116,7 @@ Future<void> loadCount() async {
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(height: 20),
-                const SizedBox(height: 70),
+                const SizedBox(height: 90),
                 ElevatedButton(
                   onPressed: isCheckedToday()
                     ? null
