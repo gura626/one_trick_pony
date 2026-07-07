@@ -100,10 +100,8 @@ Future<void> loadCount() async {
           centerTitle: true,
           backgroundColor: const Color.fromARGB(2, 250, 253, 255),
         ),
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
+        body: Center(
+          child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(
@@ -145,7 +143,6 @@ Future<void> loadCount() async {
                 ),
               ],
             ),
-          ],
         ),
       ),
     );
