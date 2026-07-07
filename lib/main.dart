@@ -24,6 +24,7 @@ Future<void> saveCount() async {
   final prefs = await SharedPreferences.getInstance();
 
   await prefs.setInt('count', count);
+  await prefs.setInt('streak', streak);
 
   if (lastCheckDate != null) {
     await prefs.setString(
@@ -38,6 +39,7 @@ Future<void> loadCount() async {
 
   setState(() {
     count = prefs.getInt('count') ?? 0;
+    streak = prefs.getInt('streak') ?? 0;
 
     String? savedDate =
         prefs.getString('lastCheckDate');
@@ -49,6 +51,7 @@ Future<void> loadCount() async {
 }
 
   int count = 0;
+  int streak = 0;
 
   DateTime? lastCheckDate;
 
@@ -64,6 +67,11 @@ Future<void> loadCount() async {
   void checkToday() {
 
     DateTime now = DateTime.now();
+    DateTime yesterday = DateTime(
+      now.year,
+      now.month,
+      now.day -1,
+    );
 
     if (lastCheckDate != null &&
         lastCheckDate!.year == now.year &&
@@ -71,6 +79,16 @@ Future<void> loadCount() async {
         lastCheckDate!.day == now.day) {
           return;
         }
+        if (lastCheckDate == null) {
+          streak = 1;
+        } else if (
+          lastCheckDate!.year == yesterday.year &&
+          lastCheckDate!.month == yesterday.month &&
+          lastCheckDate!.day == yesterday.day) {
+            streak++;
+          } else {
+            streak = 1;
+          }
         setState(() {
           count ++;
           lastCheckDate = now;
@@ -141,6 +159,13 @@ Future<void> loadCount() async {
                     fontSize: 20,
                   ),
                 ),
+                Text(
+                  'streak $streak',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                  )
+                )
               ],
             ),
         ),
