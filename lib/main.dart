@@ -23,7 +23,6 @@ class _HomepageState extends State<Homepage> {
 Future<void> saveCount() async {
   final prefs = await SharedPreferences.getInstance();
 
-  await prefs.setInt('count', count);
   await prefs.setInt('streak', streak);
 
   if (lastCheckDate != null) {
@@ -38,7 +37,6 @@ Future<void> loadCount() async {
   final prefs = await SharedPreferences.getInstance();
 
   setState(() {
-    count = prefs.getInt('count') ?? 0;
     streak = prefs.getInt('streak') ?? 0;
 
     String? savedDate =
@@ -50,7 +48,6 @@ Future<void> loadCount() async {
   });
 }
 
-  int count = 0;
   int streak = 0;
 
   DateTime? lastCheckDate;
@@ -89,10 +86,6 @@ Future<void> loadCount() async {
           } else {
             streak = 1;
           }
-        setState(() {
-          count ++;
-          lastCheckDate = now;
-        });
 
         saveCount();
   }
@@ -151,13 +144,6 @@ Future<void> loadCount() async {
                 ),
                 const SizedBox(
                   height: 100,
-                ),
-                Text(
-                  'day $count ',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20,
-                  ),
                 ),
                 Text(
                   'streak $streak',
